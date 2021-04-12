@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数据结构</title>
+    <link rel="stylesheet" href="docs/css/public.css" />
+    <style>
+      .layout {
+        display: flex;
+      }
+
+      .aside {
+        width: 180px;
+        height: 100vh;
+      }
+      .menu {
+        list-style: none;
+        background-color: #333333;
+        height: 100%;
+        color: white;
+      }
+      .menu-item {
+        line-height: 32px;
+        padding: 0 24px;
+        cursor: pointer;
+      }
+      .menu-item:hover {
+        color: var(--color-primary, #2d8cf0);
+      }
+
+      .main {
+        flex: auto;
+        min-width: 1000px;
+        height: 100vh;
+        overflow-x: hidden;
+        overflow-y: auto;
+        display: flex;
+        justify-content: center;
+      }
+      .main-inner {
+        width: 800px;
+        width: 100%;
+      }
+      .iframe {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="layout">
+      <div class="aside">
+        <ul class="menu">
+          <li class="menu-item" role="route" data-url="docs/stack.html">栈</li>
+          <li class="menu-item" role="route" data-url="docs/linked.html">
+            链表
+          </li>
+        </ul>
+      </div>
+      <div class="main">
+        <div class="main-inner">
+          <iframe
+            src="docs/stack.html"
+            frameborder="0"
+            class="iframe"
+            seamless
+            sandbox="allow-same-origin allow-scripts allow-top-navigation"
+          ></iframe>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+    const menuItem = document.querySelector(".menu");
+    menuItem.addEventListener("click", (ev) => {
+      const target = ev.target;
+      const flag = target.getAttribute("role");
+      if (flag === "route") {
+        const iframe = document.querySelector(".iframe");
+        const iframePath = iframe.getAttribute("src");
+        const targetPath = target.dataset.url;
+        if (targetPath === iframePath) {
+          return false;
+        }
+        iframe.setAttribute("src", targetPath);
+      }
+    });
+  </script>
+</html>
